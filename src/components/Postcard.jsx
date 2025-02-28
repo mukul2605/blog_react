@@ -17,9 +17,10 @@ function Postcard({
                 <img src={service.getFilePreview(featuredImage)} alt={title} 
                 className='rounded-xl'/>
             </div>
-            <h2 className='text-xl font-bold'>
+            <h2 className="text-gray-800 text-lg font-bold truncate">
                 {title}
             </h2>
+
         </div>
     </Link>
   )
