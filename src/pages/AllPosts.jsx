@@ -19,11 +19,7 @@ function AllPosts() {
 
         service.getPosts()
             .then((response) => {
-                if (response?.documents) {
-                    setPosts(response.documents);
-                } else {
-                    setPosts([]);
-                }
+                setPosts(response?.documents || []);
             })
             .catch(error => {
                 console.error("Error:", error);
@@ -32,17 +28,19 @@ function AllPosts() {
     }, [isAuthenticated, navigate]); // Depend on Redux authentication state
 
     return (
-        <div className='w-full py-8'>
+        <div className='w-full py-8 bg-gray-900 min-h-screen text-white'>
             <Container>
-                <div className='flex flex-wrap'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
                     {posts.length > 0 ? (
                         posts.map((post) => (
-                            <div key={post.$id} className='p-2 w-1/4'>
+                            <div key={post.$id} className='p-4'>
                                 <Postcard {...post} />
                             </div>
                         ))
                     ) : (
-                        <p className="text-center w-full">No posts available</p>
+                        <p className="text-gray-400 text-lg font-semibold text-center col-span-full">
+                            No posts available
+                        </p>
                     )}
                 </div>
             </Container>
