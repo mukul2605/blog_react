@@ -27,8 +27,8 @@ function Login() {
     };
 
     return (
-        <div className="flex items-center justify-center w-full min-h-screen bg-gray-900">
-            <div className="w-full max-w-lg bg-gray-100 shadow-lg rounded-xl p-10 border border-gray-300">
+        <div className="flex items-center justify-center w-full min-h-screen">
+            <div className="w-full max-w-lg card shadow-lg p-10">
                 {/* Logo Centered */}
                 <div className="mb-4 flex justify-center">
                     <span className="inline-block w-full max-w-[100px]">
@@ -37,16 +37,16 @@ function Login() {
                 </div>
 
                 {/* Title */}
-                <h2 className="text-center text-2xl font-bold text-gray-900">
+                <h2 className="text-center text-2xl font-bold text-slate-100">
                     Sign in to your account
                 </h2>
 
                 {/* Signup Link */}
-                <p className="mt-2 text-center text-base text-gray-600">
+                <p className="mt-2 text-center text-base text-slate-400">
                     Don't have an account?{' '}
                     <Link
                         to="/signup"
-                        className="font-medium text-blue-600 hover:text-blue-700 transition-all duration-200 underline"
+                        className="font-medium text-blue-400 hover:text-blue-300 transition-all duration-200 underline"
                     >
                         Sign Up
                     </Link>
@@ -54,7 +54,7 @@ function Login() {
 
                 {/* Error Message */}
                 {error && (
-                    <p className="text-red-500 mt-4 text-center font-medium">
+                    <p className="text-red-400 mt-4 text-center font-medium">
                         {error}
                     </p>
                 )}
@@ -89,7 +89,7 @@ function Login() {
                     {/* Sign In Button */}
                     <Button
                         type="submit"
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-300"
+                        className="w-full btn-primary"
                     >
                         Sign In
                     </Button>

@@ -10,6 +10,12 @@ function Home() {
     const authStatus = useSelector((state) => state.auth.status)
 
     useEffect(() => {
+        // Only fetch posts if user is authenticated
+        if (!authStatus) {
+            setLoading(false)
+            return
+        }
+
         const fetchPosts = async () => {
             try {
                 setLoading(true)
@@ -28,7 +34,85 @@ function Home() {
         }
 
         fetchPosts()
-    }, [])
+    }, [authStatus])
+
+    // Show welcome page for non-authenticated users
+    if (!authStatus) {
+        return (
+            <div className="content-wrapper section-spacing">
+                {/* Hero Section */}
+                <div className="text-center mb-16">
+                    <div className="text-6xl mb-6 animate-bounce-subtle">✨</div>
+                    <h1 className="text-5xl md:text-6xl font-bold text-slate-100 mb-6">
+                        Welcome to <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">BlogSpace</span>
+                    </h1>
+                    <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-8">
+                        A vibrant community where ideas come to life, stories are shared, and connections are made through the power of words.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="/signup" className="btn-primary text-lg px-8 py-3">
+                            Join Our Community
+                        </a>
+                        <a href="/login" className="btn-secondary text-lg px-8 py-3">
+                            Sign In
+                        </a>
+                    </div>
+                </div>
+
+                {/* Features Section */}
+                <div className="grid md:grid-cols-3 gap-8 mb-16">
+                    <div className="card text-center">
+                        <div className="text-4xl mb-4">📖</div>
+                        <h3 className="text-xl font-semibold text-slate-200 mb-3">Share Your Stories</h3>
+                        <p className="text-slate-400">
+                            Write and publish your thoughts, experiences, and insights with our easy-to-use editor.
+                        </p>
+                    </div>
+                    <div className="card text-center">
+                        <div className="text-4xl mb-4">🌟</div>
+                        <h3 className="text-xl font-semibold text-slate-200 mb-3">Discover Content</h3>
+                        <p className="text-slate-400">
+                            Explore diverse perspectives and learn from writers across different topics and interests.
+                        </p>
+                    </div>
+                    <div className="card text-center">
+                        <div className="text-4xl mb-4">🤝</div>
+                        <h3 className="text-xl font-semibold text-slate-200 mb-3">Build Connections</h3>
+                        <p className="text-slate-400">
+                            Connect with like-minded individuals and engage in meaningful conversations.
+                        </p>
+                    </div>
+                </div>
+
+                {/* About Section */}
+                <div className="card max-w-4xl mx-auto text-center">
+                    <h2 className="text-3xl font-bold text-slate-100 mb-6">What is BlogSpace?</h2>
+                    <p className="text-lg text-slate-300 mb-6 leading-relaxed">
+                        BlogSpace is more than just a blogging platform – it's a creative sanctuary where writers of all levels come together to share their unique perspectives. Whether you're a seasoned author or just starting your writing journey, our community welcomes you with open arms.
+                    </p>
+                    <div className="grid md:grid-cols-2 gap-6 text-left">
+                        <div>
+                            <h4 className="text-lg font-semibold text-slate-200 mb-2">✍️ For Writers</h4>
+                            <p className="text-slate-400">
+                                Express yourself with our intuitive editor, organize your thoughts, and reach readers who appreciate your unique voice.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 className="text-lg font-semibold text-slate-200 mb-2">📚 For Readers</h4>
+                            <p className="text-slate-400">
+                                Discover fresh perspectives, learn something new every day, and engage with content that matters to you.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="mt-8">
+                        <a href="/signup" className="btn-primary text-lg px-8 py-3">
+                            Start Your Journey Today
+                        </a>
+                    </div>
+                </div>
+            </div>
+        )
+    }
 
     if (loading) {
         return (
@@ -80,37 +164,16 @@ function Home() {
         return (
             <div className="content-wrapper section-spacing">
                 <div className="text-center max-w-2xl mx-auto">
-                    <div className="mb-8">
-                        <div className="text-6xl mb-4 animate-bounce-subtle">📝</div>
-                        <h1 className="text-4xl font-bold text-slate-100 mb-4">
-                            Welcome to BlogSpace
-                        </h1>
-                        <p className="text-xl text-slate-400 mb-8">
-                            {authStatus 
-                                ? "No posts available yet. Be the first to share your thoughts!" 
-                                : "Discover amazing stories and insights from our community."
-                            }
-                        </p>
-                    </div>
-                    
-                    {!authStatus && (
-                        <div className="card max-w-md mx-auto">
-                            <h2 className="text-xl font-semibold text-slate-200 mb-4">
-                                Join our community
-                            </h2>
-                            <p className="text-slate-400 mb-6">
-                                Login to read posts, share your thoughts, and connect with other writers.
-                            </p>
-                            <div className="flex space-x-4 justify-center">
-                                <a href="/login" className="btn-primary">
-                                    Login
-                                </a>
-                                <a href="/signup" className="btn-secondary">
-                                    Sign Up
-                                </a>
-                            </div>
-                        </div>
-                    )}
+                    <div className="text-6xl mb-4 animate-bounce-subtle">📝</div>
+                    <h1 className="text-4xl font-bold text-slate-100 mb-4">
+                        Ready to Share Your Story?
+                    </h1>
+                    <p className="text-xl text-slate-400 mb-8">
+                        No posts available yet. Be the first to share your thoughts and inspire others!
+                    </p>
+                    <a href="/add-post" className="btn-primary text-lg px-8 py-3">
+                        Write Your First Post
+                    </a>
                 </div>
             </div>
         )

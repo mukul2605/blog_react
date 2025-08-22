@@ -1,23 +1,27 @@
-import React from 'react';
-import { Editor } from '@tinymce/tinymce-react';
-import { Controller } from 'react-hook-form';
+import React from "react";
+import { Editor } from "@tinymce/tinymce-react";
+import { Controller } from "react-hook-form";
 
 function RTE({ name, control, label, defaultValue = "" }) {
   return (
-    <div className='w-full'>
-      {label && <label className='inline-block mb-1 pl-1'>{label}</label>}
+    <div className="w-full">
+      {label && <label className="inline-block mb-1 pl-1">{label}</label>}
 
       <Controller
         name={name || "content"}
         control={control}
         render={({ field: { onChange } }) => (
           <Editor
-            apiKey="1i6dfg9yt1vfld8bpccbddc1hjgb6g6q8wpt24tu55acusrw"  // Add your TinyMCE API Key here
+            apiKey={
+              import.meta.env.VITE_TINYMCE_API_KEY ||
+              "1i6dfg9yt1vfld8bpccbddc1hjgb6g6q8wpt24tu55acusrw"
+            }
             initialValue={defaultValue}
             init={{
               branding: false,
               height: 500,
               menubar: true,
+              domain_check: false,
               plugins: [
                 "image",
                 "advlist",
@@ -42,7 +46,8 @@ function RTE({ name, control, label, defaultValue = "" }) {
               ],
               toolbar:
                 "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
-              content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+              content_style:
+                "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
             }}
             onEditorChange={onChange}
           />
