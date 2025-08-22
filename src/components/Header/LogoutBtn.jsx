@@ -19,10 +19,11 @@ function LogoutBtn() {
 
     return (
         <button 
-            className='px-6 py-2 rounded-full bg-gray-700 text-white font-medium 
-                       hover:bg-gray-600 transition-all duration-200 shadow-md'
-            onClick={logoutHandler}>
-            Logout
+            className='nav-link flex items-center space-x-1 text-red-400 hover:text-red-300 hover:bg-red-900/20 px-3 py-2'
+            onClick={logoutHandler}
+        >
+            <span className="text-sm">🚪</span>
+            <span className="hidden sm:inline">Logout</span>
         </button>
     );
 }

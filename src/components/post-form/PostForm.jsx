@@ -60,18 +60,41 @@ function PostForm({ post }) {
                     alert("Please upload an image.");
                     return;
                 }
-                const file = await service.uploadFile(data.image[0]);
-                if (file) {
-                    data.featuredImage = file.$id;
-                    const dpPost = await service.createPost({
-                        ...data,
-                        userId: userData?.$id, // Ensure userData exists
-                    });
-                    if (dpPost) {
-                        navigate(`/post/${dpPost.$id}`);
+                
+                // Validate file
+                const file = data.image[0];
+                const maxSize = 10 * 1024 * 1024; // 10MB
+                const allowedTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
+                
+                if (file.size > maxSize) {
+                    alert("File size must be less than 10MB");
+                    return;
+                }
+                
+                if (!allowedTypes.includes(file.type)) {
+                    alert("Only PNG, JPG, JPEG, and GIF files are allowed");
+                    return;
+                }
+                try {
+                    const file = await service.uploadFile(data.image[0]);
+                    if (file) {
+                        data.featuredImage = file.$id;
+                        const dpPost = await service.createPost({
+                            ...data,
+                            userId: userData?.$id, // Ensure userData exists
+                        });
+                        if (dpPost) {
+                            navigate(`/post/${dpPost.$id}`);
+                        } else {
+                            console.error("Post creation failed: No response from API.");
+                            alert("Failed to create post. Please try again.");
+                        }
                     } else {
-                        console.error("Post creation failed: No response from API.");
+                        alert("File upload failed. Please try again.");
                     }
+                } catch (uploadError) {
+                    console.error("File upload error:", uploadError);
+                    alert(`Upload failed: ${uploadError.message || 'Unknown error'}`);
                 }
             }
         } catch (error) {

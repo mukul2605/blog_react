@@ -1,0 +1,132 @@
+/* App-specific styles */
+
+/* Loading states */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+  border-radius: 9999px;
+  height: 2rem;
+  width: 2rem;
+  border-bottom: 2px solid #2563eb;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Blog-specific components */
+.blog-container {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .blog-container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .blog-container {
+    padding: 0 2rem;
+  }
+}
+
+.blog-post {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: #374151;
+  max-width: none;
+}
+
+.blog-post h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+.blog-post h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.75rem;
+  margin-top: 2rem;
+}
+
+.blog-post h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.blog-post p {
+  color: #4b5563;
+  margin-bottom: 1rem;
+  line-height: 1.75;
+}
+
+.blog-post a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.blog-post a:hover {
+  color: #1d4ed8;
+}
+
+.blog-post img {
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin: 1.5rem 0;
+}
+
+.blog-post blockquote {
+  border-left: 4px solid #3b82f6;
+  padding-left: 1rem;
+  font-style: italic;
+  color: #374151;
+  margin: 1.5rem 0;
+}
+
+.blog-post code {
+  background-color: #f3f4f6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.blog-post pre {
+  background-color: #111827;
+  color: #f3f4f6;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.blog-post pre code {
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+/* Responsive design helpers */
+@media (max-width: 640px) {
+  .blog-container {
+    padding: 0 0.5rem;
+  }
+
+  .blog-post h1 {
+    font-size: 1.5rem;
+  }
+
+  .blog-post h2 {
+    font-size: 1.25rem;
+  }
+}

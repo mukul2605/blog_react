@@ -40,7 +40,19 @@ export default function Post() {
                         src={appwriteService.getFilePreview(post.featuredImage)}
                         alt={post.title}
                         className="rounded-xl"
+                        onError={(e) => {
+                            console.error('Post image failed to load:', e.target.src);
+                            console.log('Featured Image ID:', post.featuredImage);
+                            e.target.style.display = 'none';
+                            e.target.nextSibling.style.display = 'block';
+                        }}
                     />
+                    <div style={{display: 'none'}} className="w-full h-64 bg-gray-300 rounded-xl flex items-center justify-center">
+                        <div className="text-center">
+                            <p className="text-gray-600">Image not available</p>
+                            <p className="text-xs text-gray-500">ID: {post.featuredImage}</p>
+                        </div>
+                    </div>
 
                     {isAuthor && (
                         <div className="absolute right-6 top-6">

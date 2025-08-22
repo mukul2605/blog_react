@@ -14,8 +14,7 @@ const authSlice = createSlice({
                 ...state,
                 status: true,
                 userData: action.payload
-            };
-            
+            };  
         },
         logout: (state) => {
             return { // ✅ Return a new object instead of modifying `state`
